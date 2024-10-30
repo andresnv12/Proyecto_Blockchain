@@ -56,6 +56,7 @@ contract Bank {
         require (operationExecuted, "The balance could not be withdrawn");
         totalBalance = totalBalance - _amount;
         bankLedger[_customer].paymentSent.push(Transaction({amount:msg.value,timeStamp: block.timestamp}));
+        return true;
     }
 
     function isAuthorizedUser (address _address, address _customer) public view returns (bool) {
