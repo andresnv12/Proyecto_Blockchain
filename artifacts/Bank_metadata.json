@@ -49,13 +49,7 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_customerAddress",
-						"type": "address"
-					}
-				],
+				"inputs": [],
 				"name": "getCustomerBalance",
 				"outputs": [
 					{
@@ -68,7 +62,42 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getTransactionHistoryCustomer",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timeStamp",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "status",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Bank.Transaction[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_customer",
+						"type": "address"
+					},
 					{
 						"internalType": "address",
 						"name": "_address",
@@ -88,6 +117,40 @@
 			},
 			{
 				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "transactions",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timeStamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "status",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_customerAccount",
+						"type": "address"
+					},
 					{
 						"internalType": "address payable",
 						"name": "_recipient",
@@ -139,11 +202,11 @@
 	},
 	"sources": {
 		"Bank_Project.sol": {
-			"keccak256": "0x811ccc2a4291d0f04b37667a893e660bdd2ec62caac73ac45d4ff6ad68fb148f",
+			"keccak256": "0x0b37eaa984a7956c94b4a8bb24f57f7749b84c934ea60a20ff9aff89cdef3d60",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://fd7e4c773ccd6c26cf48e7f2685fc3b43d95a84c8d491d4a55c6eb931d36be7d",
-				"dweb:/ipfs/QmduEcbFM3Q44TYav3VpvVMgu2jsuUpyLJyxRbcryEsAvx"
+				"bzz-raw://d39e679c85a2978557c8d97e3d1a7d3969caff10c224a1f4e48ea9c1aa651b75",
+				"dweb:/ipfs/QmX4ZVg154ewMvdYytM3s725iD7ujKaFk58T4mZqD1kUfC"
 			]
 		}
 	},
