@@ -16,15 +16,20 @@ contract Bank {
     struct Customer {
         Transaction [] paymentReceived;
         Transaction [] paymentSent;
-        mapping (address => bool) authorizedUsers; //usuarios registrados como clientes
+        mapping (address => bool) authorizedUsers; 
         uint256 customerBalance;        
 
     }
 
+    struct autorizados{
+        address customer;
+        bool set;
+    }
     uint totalBalance;
     //tipo direccion cliente
     //direccion :: cliente
     mapping (address => Customer) bankLedger;
+    mapping (address => autorizados) authorizedUsers;
 
     constructor () {
         //inicializa el banco cuando hace deploy
@@ -41,37 +46,38 @@ contract Bank {
 
     }
 
-    // @Chris WIP
-    function withdraw (address payable _recipient, uint _amount, address _customer) public payable returns (bool) {
+    // @Chris Done
+    // @Chris usuario  autorizado solo puede tener un customer asignado, asi no usamos el customer directmente
+    function withdraw (address payable _recipient, uint _amount) public payable returns (bool) {
         //ocupamos el address del customer , y ademas el msg.sender debe de estar autorizado
-        require(isAuthorizedUser(_customer,msg.sender),"no estas autorizado por el customer");
+        require(isAuthorizedUser(authorizedUsers[msg.sender].customer,msg.sender),"no estas autorizado por el customer");
 
 
         //1-ademas agregar un require que nos diga si tiene suficiente dinero para hacer el retiro
-        require(bankLedger[_customer].customerBalance >= _amount,"no hay dinero suficiente para realizar la transferencia");
+        require(bankLedger[authorizedUsers[msg.sender].customer].customerBalance >= _amount,"no hay dinero suficiente para realizar la transferencia");
         //1-bajamos el _amount del balance del cliente 
-        bankLedger[_customer].customerBalance -= _amount;
+        bankLedger[authorizedUsers[msg.sender].customer].customerBalance -= _amount;
         //ahora si lo enviamos a la direccion 
         bool operationExecuted=_recipient.send(_amount);
         require (operationExecuted, "The balance could not be withdrawn");
         totalBalance = totalBalance - _amount;
-        bankLedger[_customer].paymentSent.push(Transaction({amount:msg.value,timeStamp: block.timestamp}));
+        bankLedger[authorizedUsers[msg.sender].customer].paymentSent.push(Transaction({amount:_amount,timeStamp: block.timestamp}));
         return true;
     }
 
-    function isAuthorizedUser (address _address, address _customer) public view returns (bool) {
+    function isAuthorizedUser (address _customer, address _address) public view returns (bool) {
         //yo como customer puedo revisar si cierto address lo tengo como como autorizado
         return bankLedger[_customer].authorizedUsers[_address];
     }
 
-
+    //ready
     function getCustomerBalance () public view returns (uint) {
         
         return bankLedger[msg.sender].customerBalance;
 
 
     }
-
+    //ready
     function getBankBalance () public view returns (uint) {
         require(msg.sender == banker, "Solo el owner del banco puede saber esta informacion" );
         return address(this).balance;
@@ -81,8 +87,12 @@ contract Bank {
     function addAuthorizedUser  (address _customerAddress, address _addressToAdd) public  {
     //agregar usuarios al mapping
     require(msg.sender == _customerAddress, "Solo el cliente puede agregar mas autorizados");
-    require(!bankLedger[_customerAddress].authorizedUsers[_addressToAdd],"ya el usuario esta como autorizado");
+    require(!authorizedUsers[_addressToAdd].set,"ya el usuario esta como autorizado");
     bankLedger[_customerAddress].authorizedUsers[_addressToAdd] = true;
-    }    
+    authorizedUsers[_addressToAdd].customer = _customerAddress;
+    authorizedUsers[_addressToAdd].set = true;
+    }
+
+    // podemos agregar unas funciones que sigan las transaccion de cada customer para poder , puede ser como eventos
 }
 
