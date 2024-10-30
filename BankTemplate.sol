@@ -65,6 +65,7 @@ contract Bank {
         return true;
     }
 
+    // @chris aqui aun puedo volarme el _customer pero podemos hablalro
     function isAuthorizedUser (address _customer, address _address) public view returns (bool) {
         //yo como customer puedo revisar si cierto address lo tengo como como autorizado
         return bankLedger[_customer].authorizedUsers[_address];
