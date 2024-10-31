@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 
+//Christophe
+//Andres
 pragma solidity ^0.8.19;
 
 contract Bank {
@@ -27,7 +29,7 @@ contract Bank {
     }
 
     
-    Transaction [] public transactions;
+    
     uint totalBalance;
     mapping (address => Customer) bankLedger;
     
