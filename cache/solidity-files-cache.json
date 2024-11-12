@@ -1,0 +1,41 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/christopherfernandez/Desktop/Smart_Contract/primer_proyecto_curso_banco/Proyecto_Blockchain/Contracts/newContract.sol": {
+      "lastModificationDate": 1731385873240,
+      "contentHash": "9a0c58dcfb3de2437ee1c7ac6842a1fb",
+      "sourceName": "Contracts/newContract.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.19"
+      ],
+      "artifacts": [
+        "Bank"
+      ]
+    }
+  }
+}
