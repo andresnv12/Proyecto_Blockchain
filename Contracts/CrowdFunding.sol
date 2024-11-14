@@ -4,6 +4,7 @@ pragma solidity ^0.8.26;
 
 //incluir librerias de ERC20
 //incluir librerias de ERC721 (NFTs)
+
 contract SimpleContract {
     
     //
@@ -17,14 +18,17 @@ contract SimpleContract {
         int256 tokenY; //cantidad de tokens enviados
         int256 NFTs;
     }
-
+    
+    int256 totalFunds;
     address Fundraiser;
+    int256 investors;
 
     //set when the contract was deployed
     constructor ()
     {
         Fundraiser = msg.sender;
-        
+        totalFunds = 0;
+        investors = 0;
     }
 
     mapping (address => Inversor1) Backer1;
