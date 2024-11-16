@@ -6,7 +6,7 @@ pragma solidity ^0.8.26;
 import "./token.sol";
 //incluir librerias de ERC721 (NFTs)
 
-contract SimpleContract is Token {
+contract CrowdFunding is Token {
     
     
     struct Inversor1 {
