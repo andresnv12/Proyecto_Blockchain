@@ -9,12 +9,12 @@ contract SimpleContract {
     
     //
     struct Inversor1 {
-        int256 moneyInvested;
+        int256 moneyInvested; // cantidad de dinero invertido
         int256 tokenX; //cantidad de tokens enviados
     }
 
     struct Inversor2 {
-        int256 moneyInvested;
+        int256 moneyInvested; //cantidad de dinero invertido
         int256 tokenY; //cantidad de tokens enviados
         int256 NFTs;
     }
@@ -42,6 +42,7 @@ contract SimpleContract {
     //funcion para mintear tokens y depositar a los inversones
     //funcion para generar NFTs y agregar al usuario
     //funcion para retirar tanto NFTs como tokens a la direccion de cada usuario
+    //funcion para que el dueno pueda retirar los fondos
 
 
 }
