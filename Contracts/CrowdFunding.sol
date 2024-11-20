@@ -26,7 +26,8 @@ contract CrowdFunding is Token {
     uint256 private tokens;
     Token public token;
     uint256 goal; // objetivo
-
+    uint256 temp;
+    uint256 tempNFTs;
     //set when the contract was deployed
     constructor (uint256 _goal,address _tokenAddress)
     {
@@ -40,30 +41,64 @@ contract CrowdFunding is Token {
     mapping (address => Inversor1) Backer1;
     mapping (address => Inversor2) Backer2;
 
-
-    function deposit(uint256 _amount) public {
+    function deposit(uint256 _amount, address inversor) public {
+        require(msg.sender == Fundraiser, "Solo el Owner puede hacer agregar inversores en este contrato");
         //mayor a 10000 inverso2
         
         if (_amount >= 10000) {
             //agregar al tracking de cada usuario
-            Backer2[msg.sender].moneyInvested += _amount;
-            Backer2[msg.sender].tokenY += numberOfTokens(_amount);
-            Backer2[msg.sender].NFTs += 1;
+            Backer2[inversor].moneyInvested += _amount;
+            Backer2[inversor].tokenY += numberOfTokens(_amount);
+            Backer2[inversor].NFTs += 1;
             totalFunds += _amount;
             investors += 1;
         }else {
-            Backer1[msg.sender].moneyInvested += _amount;
-            Backer1[msg.sender].tokenX += numberOfTokens(_amount);
+            Backer1[inversor].moneyInvested += _amount;
+            Backer1[inversor].tokenX += numberOfTokens(_amount);
             totalFunds += _amount;
             investors += 1;
         }
     }
 
+    
     //funcion que nos dice la cantidad de tokens a dar segun el monto
     function numberOfTokens(uint256 _amount) private  returns (uint256){
         tokens = _amount/10;
         return tokens;
+    }
 
+
+    // Chris
+    //Para poder retirar fondos con esta cuenta del address
+    // debemos tener el address del contrato en el metodo approve del token.sol
+    //pasos
+    // 1- Desplegar token.symbol
+    // 2 - Desplegar crowndfunding.sol con el address del token.symbol
+    // 3- ir a la funcion del approve del token.sol para agregar el address del crownfunding.sol
+    //listo ya podemos retirar fondos a travez del address del crownfunding :)
+
+    function withdrawn(address inversor) public {
+        //ocupo pasarle esa cantidad de tokens al contrato de crownfunding
+        require(msg.sender == Fundraiser, "Solo el Owner puede hacer retiros en este contrato");
+        //revisar funciones
+        if (Backer1[inversor].tokenX > 0) {
+            //se almacena en temp la cantidad de tokens a enviar
+            temp = Backer1[inversor].tokenX;
+            Backer1[inversor].tokenX = 0;
+            token.transferFrom(Fundraiser, inversor, temp * 100); // por los decimales del token
+            temp = 0;
+        }else {
+            temp = Backer2[inversor].tokenY;
+            Backer2[inversor].tokenY = 0;
+            tempNFTs = Backer2[inversor].NFTs;
+            Backer2[inversor].NFTs = 0;
+            //Send tokens
+            token.transferFrom(Fundraiser, inversor, temp * 100); // por los decimales del token
+            temp = 0;
+            //Send NFTs (Pending)
+
+
+        }
     }
 
     // el contrato puede recibir ether
