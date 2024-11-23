@@ -11,6 +11,13 @@
 				"type": "constructor"
 			},
 			{
+				"inputs": [],
+				"name": "activeCustomer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -24,6 +31,13 @@
 					}
 				],
 				"name": "addAuthorizedUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "deactiveCustomer",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -118,40 +132,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "transactions",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "timeStamp",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "status",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_customerAccount",
-						"type": "address"
-					},
-					{
 						"internalType": "address payable",
 						"name": "_recipient",
 						"type": "address"
@@ -202,11 +182,11 @@
 	},
 	"sources": {
 		"Bank_Project.sol": {
-			"keccak256": "0x0b37eaa984a7956c94b4a8bb24f57f7749b84c934ea60a20ff9aff89cdef3d60",
+			"keccak256": "0x81235fa08fef69701b0c7e39921fa42b0d0038fa6d56635e35b9b2bd91717730",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://d39e679c85a2978557c8d97e3d1a7d3969caff10c224a1f4e48ea9c1aa651b75",
-				"dweb:/ipfs/QmX4ZVg154ewMvdYytM3s725iD7ujKaFk58T4mZqD1kUfC"
+				"bzz-raw://fe75aa9103660645d0c1e513b2a7557d0e130659b72d241d6776a49057de41c3",
+				"dweb:/ipfs/QmRLS1hM86fan88g8AB5gsveDC9apa1k2dnyFr1Jjw9LPD"
 			]
 		}
 	},
