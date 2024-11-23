@@ -32,6 +32,7 @@ contract CrowdFunding is Token {
     constructor (uint256 _goal,address _tokenAddress)
     {
         token = Token(payable(_tokenAddress));
+        //inicializar NFT AQUI
         Fundraiser = msg.sender;
         totalFunds = 0;
         investors = 0;
