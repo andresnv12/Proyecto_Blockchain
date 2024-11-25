@@ -3,8 +3,8 @@ require("@nomicfoundation/hardhat-toolbox");
 
 // Ensure your configuration variables are set before executing the script
 const { vars } = require("hardhat/config");
-const INFURA_API_KEY = vars.get("INFURA_API_KEY");
-const SEPOLIA_PRIVATE_KEY = vars.get("SEPOLIA_PRIVATE_KEY");
+const INFURA_API_KEY = vars.get("INFURA_API_KEY"); //infura key
+const SEPOLIA_PRIVATE_KEY = vars.get("SEPOLIA_PRIVATE_KEY"); // mi clave privada
 
 module.exports = {
 

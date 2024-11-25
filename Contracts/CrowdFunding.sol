@@ -3,8 +3,9 @@
 pragma solidity ^0.8.26;
 
 //incluir librerias de ERC20
-import "./token.sol";
+import "./Token.sol";
 //incluir librerias de ERC721 (NFTs)
+import "./MyNFT.sol";
 
 contract CrowdFunding is Token {
     
@@ -25,13 +26,15 @@ contract CrowdFunding is Token {
     uint256 investors; //inversores
     uint256 private tokens;
     Token public token;
+    MyNFT public nft;
     uint256 goal; // objetivo
     uint256 temp;
     uint256 tempNFTs;
     //set when the contract was deployed
-    constructor (uint256 _goal,address _tokenAddress)
+    constructor (uint256 _goal,address _tokenAddress, address _NftAddress)
     {
         token = Token(payable(_tokenAddress));
+        nft = MyNFT(_NftAddress);
         //inicializar NFT AQUI
         Fundraiser = msg.sender;
         totalFunds = 0;
@@ -96,8 +99,8 @@ contract CrowdFunding is Token {
             //Send tokens
             token.transferFrom(Fundraiser, inversor, temp * 100); // por los decimales del token
             temp = 0;
-            //Send NFTs (Pending)
-
+            //Send NFTs 
+            nft.safeMint(inversor, "ipfs://QmNQFmnBP1YdjMWQsRHNRVGBq9YjPVFmDJY93qKWFQNYa6");
 
         }
     }
