@@ -3,7 +3,7 @@
 pragma solidity ^0.8.26;
 
 //incluir librerias de ERC20
-import "./Token.sol";
+import "./token.sol";
 //incluir librerias de ERC721 (NFTs)
 import "./MyNFT.sol";
 
@@ -71,15 +71,6 @@ contract CrowdFunding is Token {
         return tokens;
     }
 
-
-    // Chris
-    //Para poder retirar fondos con esta cuenta del address
-    // debemos tener el address del contrato en el metodo approve del token.sol
-    //pasos
-    // 1- Desplegar token.symbol
-    // 2 - Desplegar crowndfunding.sol con el address del token.symbol
-    // 3- ir a la funcion del approve del token.sol para agregar el address del crownfunding.sol
-    //listo ya podemos retirar fondos a travez del address del crownfunding :)
 
     function withdrawn(address inversor) public {
         //ocupo pasarle esa cantidad de tokens al contrato de crownfunding
