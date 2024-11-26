@@ -62,10 +62,10 @@ contract Token is ERC20Interface, SafeMath {
     mapping(address => mapping(address => uint)) allowed;
  
     constructor()  {
-        symbol = "TokenSymbol"; // Please, update
-        name = "Select a nice name"; // Please, update
+        symbol = "RHN"; // Please, update
+        name = "Rhino"; // Please, update
         decimals = 2; // Please update
-        _totalSupply= 10000; // Please update
+        _totalSupply= 1000000000; // Please update
         balances[msg.sender] = _totalSupply;
         emit Transfer(address(0), msg.sender, _totalSupply);
     }

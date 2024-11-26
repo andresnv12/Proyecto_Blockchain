@@ -1,4 +1,5 @@
 const hre = require("hardhat");
+const readline = require("readline");
 
 async function main() {
 
@@ -25,25 +26,89 @@ async function main() {
 
 
   //-------------------------Empieza la interaccion------------
-  // Ejemplo Basico dado por el profe
-  //obtener data de los cntratos
-	const data = await contractJS.getData();
-	
-  //Empieza interaccion ocn el contrato
-	console.log("The data of the contract is: ", data.toString());
-	
-	const operand=13;
-	
-	const dataOperated=await contractJS.accumulateData(operand);
-	dataOperated.wait(1);
-		
-    }
-   catch (error) {
+  
+    const rl = readline.createInterface({
+      input: process.stdin, 
+      output: process.stdout, 
+    });
 
-    console.error(error);
-
-    process.exit(1);
+    console.log("Approving the CrowdFunding contract inside the token contract...");
+    const approve = await TcontractJS.approve(CFcontractAddress, 10000000);
+    approve.wait(1);
+    menu();
 
   }
+
+  catch (error) {
+
+   console.error(error);
+
+   process.exit(1);
+
+ }
 }
+
+async function Deposit() {
+
+  rl.question("Please deposit an amount: ", async (input) => {
+    const amount = parseInt(input);
+    rl.close();
+  });
+
+  rl.question("Please add the investor address: ", async (input) => {
+    const investor = input;
+    rl.close();
+  });
+
+const deposit = await CFcontractJS.deposit(amount, investor);
+deposit.wait(1);
+}
+
+async function Withdraw() {
+
+  rl.question("Please add the investor address: ", async (input) => {
+    const investor = input;
+    rl.close();
+  });
+
+  const withdraw = await CFcontractJS.withdraw(investor);
+  withdraw.wait(1);
+
+}
+
+const readline = require("readline-sync");
+
+function menu() {
+    let opcion;
+
+    do {
+        // Mostrar el menú
+        console.log("\nMenú Principal:");
+        console.log("1. Ingresar inversor");
+        console.log("2. Retiro de tokens");
+        console.log("3. Salir");
+        opcion = readline.question("Ingrese una opción: ");
+
+        
+        switch (opcion) {
+            case "1":
+                Deposit();
+                break;
+            case "2":
+                Withdraw();
+                break;
+            case "3":
+                console.log("Saliendo del programa...");
+                break;
+            default:
+                console.log("Opción no válida. Inténtelo de nuevo.");
+        }
+    } while (opcion !== "3");
+}
+
+   
+    
+    
+  
+  
 main();
