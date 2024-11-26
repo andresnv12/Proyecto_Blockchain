@@ -77,6 +77,8 @@ async function main() {
     const CFFactory = await hre.ethers.getContractFactory("CrowdFunding");
     const CFcontractAddress = "0x735D2699a6A2fE63FC6381e0c04A0F6D3cf81D19"; // Replace with your deployed contract address
     const CFcontractJS = await CFFactory.attach(CFcontractAddress);
+    const deposit = await CFcontractJS.deposit(100000, "0xa2C1eCdb1Aa2d0E51705E83538D043511459323C");
+    deposit.wait(1);
 
     //Token
     const TFactory = await hre.ethers.getContractFactory("Token");
@@ -93,11 +95,11 @@ async function main() {
   //-------------------------Empieza la interaccion------------
   
 
-    console.log("Approving the CrowdFunding contract inside the token contract...");
-    const approve = await TcontractJS.approve(CFcontractAddress, 10000000);
-    approve.wait(1);
+    //console.log("Approving the CrowdFunding contract inside the token contract...");
+    //const approve = await TcontractJS.approve(CFcontractAddress, 10000000);
+    //approve.wait(1);
     
-    menu();
+    //menu();
 
   }
 
