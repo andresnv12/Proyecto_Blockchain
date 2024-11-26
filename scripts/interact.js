@@ -9,21 +9,23 @@ const rl = readline.createInterface({
 let CFcontractJS;
 let TcontractJS;
 let NFTcontractJS;
+let amount;
+let investor;
 
 async function Deposit() {
 
   rl.question("Please deposit an amount: ", async (input) => {
-    const amount = parseInt(input);
+    amount = parseInt(input);
     rl.close();
   });
 
   rl.question("Please add the investor address: ", async (input) => {
-    const investor = input;
+    investor = input;
     rl.close();
   });
 
-const deposit = await CFcontractJS.deposit(amount, investor);
-deposit.wait(1);
+  const deposit = await CFcontractJS.deposit(amount, investor);
+  await deposit.wait(1);
 }
 
 async function Withdraw() {
@@ -75,19 +77,17 @@ async function main() {
 
     //CrowdFunding 
     const CFFactory = await hre.ethers.getContractFactory("CrowdFunding");
-    const CFcontractAddress = "0x735D2699a6A2fE63FC6381e0c04A0F6D3cf81D19"; // Replace with your deployed contract address
+    const CFcontractAddress = "0x06002AE5ee433980bd268Ff11d48B83E01014eFA"; // Replace with your deployed contract address
     const CFcontractJS = await CFFactory.attach(CFcontractAddress);
-    const deposit = await CFcontractJS.deposit(100000, "0xa2C1eCdb1Aa2d0E51705E83538D043511459323C");
-    deposit.wait(1);
 
     //Token
     const TFactory = await hre.ethers.getContractFactory("Token");
-    const TcontractAddress = "0x71e9d321E930Cccb50c0501b324768af53401536"; // Replace with your deployed contract address
+    const TcontractAddress = "0xFB5714584d281e4F9b6d8546A123db8797b89ab5"; // Replace with your deployed contract address
     const TcontractJS = await TFactory.attach(TcontractAddress);   
 
     //MyNFT
     const NFTFactory = await hre.ethers.getContractFactory("MyNFT");
-    const NFTcontractAddress = "0x6B0659285e7A534349943a11a358F8162219B50D"; // Replace with your deployed contract address
+    const NFTcontractAddress = "0x318c7bE5e0ad7789DcE3Ec17493486aD4FE13c7E"; // Replace with your deployed contract address
     const NFTcontractJS = await NFTFactory.attach(NFTcontractAddress);
 
 
@@ -95,11 +95,30 @@ async function main() {
   //-------------------------Empieza la interaccion------------
   
 
-    //console.log("Approving the CrowdFunding contract inside the token contract...");
-    //const approve = await TcontractJS.approve(CFcontractAddress, 10000000);
-    //approve.wait(1);
-    
+    console.log("Approving the CrowdFunding contract inside the token contract...");
+    const approve = await TcontractJS.approve(CFcontractAddress, 10000000);
+    await approve.wait(1);
+    console.log("Approve....");
+
+
+    ///////////TESTING/////////
+    let inversor = "0x6f8A6A19B28c5a1C9DB365C395AE76Ce92B326C4";
+    let uri = "ipfs://QmWyBQbEGyAetFSw7nbHhx7cdXoY4EFn46H2k2D1fgPmn7";
+    //deposit
+    console.log("Deposit function....");
+    const deposit = await CFcontractJS.deposit(11000, inversor);
+    console.log("Transaction hash:  ", deposit.hash)
+    console.log("End Deposit function....");
+    await deposit.wait(1);
     //menu();
+
+    //withdraw
+    console.log("Withdraw function....");
+    const withdraw = await CFcontractJS.withdrawn(inversor,uri);
+    console.log("Transaction hash:  ", withdraw.hash)
+    console.log("End withdraw function..");
+    await withdraw.wait(1);
+
 
   }
 

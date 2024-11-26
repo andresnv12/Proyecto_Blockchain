@@ -72,7 +72,7 @@ contract CrowdFunding is Token {
     }
 
 
-    function withdrawn(address inversor) public {
+    function withdrawn(address inversor, string memory uri) public {
         //ocupo pasarle esa cantidad de tokens al contrato de crownfunding
         require(msg.sender == Fundraiser, "Solo el Owner puede hacer retiros en este contrato");
         //revisar funciones
@@ -91,7 +91,8 @@ contract CrowdFunding is Token {
             token.transferFrom(Fundraiser, inversor, temp * 100); // por los decimales del token
             temp = 0;
             //Send NFTs 
-            nft.safeMint(inversor, "ipfs://QmNQFmnBP1YdjMWQsRHNRVGBq9YjPVFmDJY93qKWFQNYa6");
+            //error aqui en teoria modificar
+            nft.safeMint(inversor, uri);
 
         }
     }
