@@ -90,6 +90,9 @@ async function main() {
     const NFTcontractAddress = "0x318c7bE5e0ad7789DcE3Ec17493486aD4FE13c7E"; // Replace with your deployed contract address
     const NFTcontractJS = await NFTFactory.attach(NFTcontractAddress);
 
+    //const NFT_approve = await NFTcontractJS.transferOwnership(CFcontractAddress);
+    //NFT_approve.wait(1);
+
 
 
   //-------------------------Empieza la interaccion------------
@@ -102,8 +105,9 @@ async function main() {
 
 
     ///////////TESTING/////////
-    let inversor = "0x6f8A6A19B28c5a1C9DB365C395AE76Ce92B326C4";
-    let uri = "ipfs://QmWyBQbEGyAetFSw7nbHhx7cdXoY4EFn46H2k2D1fgPmn7";
+    let inversor = "0x10EF23fe0763CB493eC434C488a4B0F28Ac0bd83";//yo mismo
+    //let inversor = "0x6fC39e794AfEA7A4506D697514aeB47C4eE5df19";
+    let uri = "ipfs://QmTN3norZ3PQAcvew69xPLrXa9VixM5H9BYunkDbEJA1i4";
     //deposit
     console.log("Deposit function....");
     const deposit = await CFcontractJS.deposit(11000, inversor);
@@ -119,7 +123,7 @@ async function main() {
     console.log("End withdraw function..");
     await withdraw.wait(1);
 
-
+  ///////////TESTING/////////
   }
 
   catch (error) {
