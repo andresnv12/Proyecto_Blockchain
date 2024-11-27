@@ -105,25 +105,29 @@ async function main() {
 
 
     ///////////TESTING/////////
-    let inversor = "0x10EF23fe0763CB493eC434C488a4B0F28Ac0bd83";//yo mismo
-    //let inversor = "0x6fC39e794AfEA7A4506D697514aeB47C4eE5df19";
-    let uri = "ipfs://QmTN3norZ3PQAcvew69xPLrXa9VixM5H9BYunkDbEJA1i4";
-    //deposit
-    console.log("Deposit function....");
-    const deposit = await CFcontractJS.deposit(11000, inversor);
-    console.log("Transaction hash:  ", deposit.hash)
-    console.log("End Deposit function....");
-    await deposit.wait(1);
+    //let inversor = "0x10EF23fe0763CB493eC434C488a4B0F28Ac0bd83";//yo mismo
+    ////let inversor = "0x6fC39e794AfEA7A4506D697514aeB47C4eE5df19";
+    //let uri = "ipfs://QmTN3norZ3PQAcvew69xPLrXa9VixM5H9BYunkDbEJA1i4";
+    ////deposit
+    //console.log("Deposit function....");
+    //const deposit = await CFcontractJS.deposit(11000, inversor);
+    //console.log("Transaction hash:  ", deposit.hash)
+    //console.log("End Deposit function....");
+    //await deposit.wait(1);
     //menu();
-
-    //withdraw
-    console.log("Withdraw function....");
-    const withdraw = await CFcontractJS.withdrawn(inversor,uri);
-    console.log("Transaction hash:  ", withdraw.hash)
-    console.log("End withdraw function..");
-    await withdraw.wait(1);
+//
+    ////withdraw
+    //console.log("Withdraw function....");
+    //const withdraw = await CFcontractJS.withdrawn(inversor,uri);
+    //console.log("Transaction hash:  ", withdraw.hash)
+    //console.log("End withdraw function..");
+    //await withdraw.wait(1);
 
   ///////////TESTING/////////
+
+
+  
+  
   }
 
   catch (error) {
